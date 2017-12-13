@@ -1,5 +1,10 @@
 package spaceShooting;
 
+/**
+ * 空間ベクトル
+ * @author ryuryu
+ *
+ */
 public class CubicVector
 {
 	/**
@@ -7,6 +12,9 @@ public class CubicVector
 	 */
 	public float x, y, z;
 
+	/**
+	 * コンストラクタ
+	 */
 	public CubicVector()
 	{
 		x = 0;
@@ -14,6 +22,12 @@ public class CubicVector
 		z = 0;
 	}
 
+	/**
+	 * コンストラクタ
+	 * @param x 空間ベクトルのx成分
+	 * @param y 空間ベクトルのy成分
+	 * @param z 空間ベクトルのz成分
+	 */
 	public CubicVector(float x, float y, float z)
 	{
 		this.x = x;

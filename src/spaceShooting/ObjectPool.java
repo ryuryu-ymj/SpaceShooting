@@ -13,12 +13,13 @@ import org.newdawn.slick.Input;
 public class ObjectPool
 {
 	CubicVector cameraPoint = new CubicVector(0, 0, 0);
-	double cameraAngleXY = Math.PI / 2;
-	double cameraAngleYZ = Math.PI / 2;
+	double cameraAngleXY = 0;
+	double cameraAngleYZ = 0;
 	CubicVector cubicPoint1 = new CubicVector(200, 0, 0);
 	CubicVector cubicPoint2 = new CubicVector(-200, 0, 0);
 	CubicVector cubicPoint3 = new CubicVector(0, 200, 200);
 	CubicVector cubicPoint4 = new CubicVector(0, 200, 0);
+	CubicVector cubicPoint5 = new CubicVector(0, 0, -200);
 
 	ObjectPool()
 	{
@@ -43,13 +44,14 @@ public class ObjectPool
 	 */
 	public void render(Graphics g)
 	{
-		//cameraAngleXY += 0.01;
+		cameraAngleXY += 0.01;
 		cameraAngleYZ += 0.01;
 
-		PlaneVector planePoint1 = ThreeD.getPlanePointFromCubicPoint(cubicPoint1, cameraPoint, cameraAngleXY, cameraAngleYZ);
-		PlaneVector planePoint2 = ThreeD.getPlanePointFromCubicPoint(cubicPoint2, cameraPoint, cameraAngleXY, cameraAngleYZ);
-		PlaneVector planePoint3 = ThreeD.getPlanePointFromCubicPoint(cubicPoint3, cameraPoint, cameraAngleXY, cameraAngleYZ);
-		PlaneVector planePoint4 = ThreeD.getPlanePointFromCubicPoint(cubicPoint4, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		PlaneVector planePoint1 = Cube.getPlanePointFromCubicPoint(cubicPoint1, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		PlaneVector planePoint2 = Cube.getPlanePointFromCubicPoint(cubicPoint2, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		PlaneVector planePoint3 = Cube.getPlanePointFromCubicPoint(cubicPoint3, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		PlaneVector planePoint4 = Cube.getPlanePointFromCubicPoint(cubicPoint4, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		PlaneVector planePoint5 = Cube.getPlanePointFromCubicPoint(cubicPoint5, cameraPoint, cameraAngleXY, cameraAngleYZ);
 
 		g.setColor(Color.black);
 		g.drawLine(planePoint1.x, planePoint1.y, planePoint2.x, planePoint2.y);
@@ -58,6 +60,10 @@ public class ObjectPool
 		g.drawLine(planePoint1.x, planePoint1.y, planePoint4.x, planePoint4.y);
 		g.drawLine(planePoint4.x, planePoint4.y, planePoint2.x, planePoint2.y);
 		g.drawLine(planePoint4.x, planePoint4.y, planePoint3.x, planePoint3.y);
+		g.drawLine(planePoint1.x, planePoint1.y, planePoint5.x, planePoint5.y);
+		g.drawLine(planePoint5.x, planePoint5.y, planePoint2.x, planePoint2.y);
+		g.drawLine(planePoint5.x, planePoint5.y, planePoint3.x, planePoint3.y);
+		g.drawLine(planePoint5.x, planePoint5.y, planePoint4.x, planePoint4.y);
 		//System.out.println(planePoint1.x + " " + planePoint1.y + " " + planePoint2.x + " " + planePoint2.y);
 	}
 
