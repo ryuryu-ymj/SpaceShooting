@@ -1,5 +1,11 @@
 package spaceShooting;
 
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Polygon;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
+
 /**
  * 立体の処理
  * @author ryuryu
@@ -29,5 +35,19 @@ public class Cube
 		planePoint.y = Play.DISPLAY_HEIGHT / 2 + (float) (lengthYZ * Math.sin(pointAngleYZ - cameraAngleYZ - Math.PI / 2));
 
 		return planePoint;
+	}
+
+	public static void fillCubicPolygon(Graphics g, Color sideColor, Color faceColor, CubicVector[] cubicPoints, CubicVector cameraPoint, double cameraAngleXY, double cameraAngleYZ)
+	{
+		Polygon polygon = new Polygon();
+		for (int i = 0; i < cubicPoints.length; i++)
+		{
+			PlaneVector point = getPlanePointFromCubicPoint(cubicPoints[i], cameraPoint, cameraAngleXY, cameraAngleYZ);
+			polygon.addPoint(point.x, point.y);
+		}
+		g.setColor(faceColor);
+		g.fill(polygon);
+		g.setColor(sideColor);
+		g.draw(polygon);
 	}
 }

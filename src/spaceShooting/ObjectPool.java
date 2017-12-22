@@ -3,7 +3,6 @@ package spaceShooting;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 
 /**
  * ゲームオブジェクトの管理クラス.
@@ -14,12 +13,17 @@ public class ObjectPool
 {
 	CubicVector cameraPoint = new CubicVector(0, 0, 0);
 	double cameraAngleXY = 0;
-	double cameraAngleYZ = 0;
+	double cameraAngleYZ = 0.1;
 	CubicVector cubicPoint1 = new CubicVector(200, 0, 0);
 	CubicVector cubicPoint2 = new CubicVector(-200, 0, 0);
 	CubicVector cubicPoint3 = new CubicVector(0, 200, 200);
 	CubicVector cubicPoint4 = new CubicVector(0, 200, 0);
 	CubicVector cubicPoint5 = new CubicVector(0, 0, -200);
+
+	CubicVector[] cubicPoints1 = {cubicPoint1, cubicPoint2, cubicPoint3};
+	CubicVector[] cubicPoints2 = {cubicPoint1, cubicPoint2, cubicPoint4};
+	CubicVector[] cubicPoints3 = {cubicPoint1, cubicPoint4, cubicPoint3};
+	CubicVector[] cubicPoints4 = {cubicPoint4, cubicPoint2, cubicPoint3};
 
 	ObjectPool()
 	{
@@ -44,7 +48,7 @@ public class ObjectPool
 	 */
 	public void render(Graphics g)
 	{
-		cameraAngleXY += 0.01;
+		//cameraAngleXY += 0.01;
 		cameraAngleYZ += 0.01;
 
 		PlaneVector planePoint1 = Cube.getPlanePointFromCubicPoint(cubicPoint1, cameraPoint, cameraAngleXY, cameraAngleYZ);
@@ -53,8 +57,11 @@ public class ObjectPool
 		PlaneVector planePoint4 = Cube.getPlanePointFromCubicPoint(cubicPoint4, cameraPoint, cameraAngleXY, cameraAngleYZ);
 		PlaneVector planePoint5 = Cube.getPlanePointFromCubicPoint(cubicPoint5, cameraPoint, cameraAngleXY, cameraAngleYZ);
 
-		g.setColor(Color.black);
-		g.drawLine(planePoint1.x, planePoint1.y, planePoint2.x, planePoint2.y);
+		Cube.fillCubicPolygon(g, Color.red, Color.pink, cubicPoints1, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		Cube.fillCubicPolygon(g, Color.red, Color.pink, cubicPoints2, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		Cube.fillCubicPolygon(g, Color.red, Color.pink, cubicPoints3, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		Cube.fillCubicPolygon(g, Color.red, Color.pink, cubicPoints4, cameraPoint, cameraAngleXY, cameraAngleYZ);
+		/*g.drawLine(planePoint1.x, planePoint1.y, planePoint2.x, planePoint2.y);
 		g.drawLine(planePoint3.x, planePoint3.y, planePoint2.x, planePoint2.y);
 		g.drawLine(planePoint1.x, planePoint1.y, planePoint3.x, planePoint3.y);
 		g.drawLine(planePoint1.x, planePoint1.y, planePoint4.x, planePoint4.y);
@@ -63,7 +70,7 @@ public class ObjectPool
 		g.drawLine(planePoint1.x, planePoint1.y, planePoint5.x, planePoint5.y);
 		g.drawLine(planePoint5.x, planePoint5.y, planePoint2.x, planePoint2.y);
 		g.drawLine(planePoint5.x, planePoint5.y, planePoint3.x, planePoint3.y);
-		g.drawLine(planePoint5.x, planePoint5.y, planePoint4.x, planePoint4.y);
+		g.drawLine(planePoint5.x, planePoint5.y, planePoint4.x, planePoint4.y);*/
 		//System.out.println(planePoint1.x + " " + planePoint1.y + " " + planePoint2.x + " " + planePoint2.y);
 	}
 
